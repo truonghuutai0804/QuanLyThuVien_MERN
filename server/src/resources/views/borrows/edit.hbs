@@ -1,0 +1,27 @@
+<div class="mt-4">
+    <h3>Cập nhật tác giả</h3>
+    <form  class="mt-4" method="POST" action="/admin/borrows/{{borrow._id}}?_method=PUT" >
+        <div class="mb-3">
+            <label for="ID" class="form-label">ID phiếu mượn</label>
+            <input type="text" class="form-control" value="{{borrow._id}}" id="ID" name="ID" disabled >
+        </div> 
+        <div class="mb-3">
+            <label for="userBorrow" class="form-label">Tên người mượn</label>
+            <input type="text" class="form-control" value="{{borrow.userBorrow.nameUser}}" id="userBorrow" name="userBorrow" disabled >
+        </div>
+        <div class="mb-3">
+            <label for="staffBorrow" class="form-label">Tên nhân viên</label>
+            <input type="text" class="form-control" value="{{borrow.staffBorrow.nameStaff}}" id="staffBorrow" name="staffBorrow" disabled>
+        </div>
+        <div class="mb-3">
+            <label for="appointmentDate" class="form-label">Ngày mượn</label>
+            <input type="text" class="form-control" value="{{dateFormat borrow.borrowDate "DD-MM-YYYY"}}" id="appointmentDate" name="appointmentDate" disabled>
+        </div>
+        <div class="mb-3">
+            <label for="returnDate" class="form-label">Ngày trả</label>
+            <input type="date" class="form-control" value="{{borrow.returnDate}}" id="returnDate" name="returnDate" >
+        </div>
+
+        <button type="submit" class="btn btn-primary">Lưu lại</button>
+    </form>
+</div> 

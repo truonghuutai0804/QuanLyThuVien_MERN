@@ -1,0 +1,56 @@
+<div class="mt-4">
+    <form class='mt-3' method="POST" action="/admin/borrows/stored" >
+        <h3>Lập phiếu mượn</h3>
+        <div class="mb-3">
+            <label for="nameUser" class="form-label">Tên người mượn</label>
+            <input class="form-control" list="datalistUser" id="nameUser" name="userBorrow" placeholder="Nhập tên người mượn">
+            <datalist id="datalistUser">
+                {{#each users}}
+                <option value="{{this._id}}">{{this.nameUser}}</option>
+                 {{/each}}   
+            </datalist>
+        </div>
+        <div class="mb-3">
+            <label for="nameBook" class="form-label">Tên sách</label>
+            <input class="form-control" list="datalistBook" id="nameBook" name="bookBorrow" placeholder="Nhập tên sách mượn">
+            <datalist id="datalistBook">
+                {{#each books}}
+                <option value="{{this._id}}">{{this.nameBook}}</option>
+                {{/each}}
+            </datalist>
+        </div>
+        <div id="nameBook1"></div>
+        <div id="nameBook2"></div>
+        <a id="addBook" class="btn btn-primary">Thêm</a>
+        <div class="mb-3">
+            <label for="appointmentDate" class="form-label">Ngày hẹn</label>
+            <input type="date" class="form-control" id="appointmentDate" name="appointmentDate">
+        </div>
+        <button type="submit" class="btn btn-primary">Lưu lại</button>
+    </form>
+</div>
+
+<script>
+    const addBook = document.getElementById('addBook');
+    const nameBook1 = document.getElementById('nameBook1');
+    const nameBook2 = document.getElementById('nameBook2');
+    const x = document.createElement("INPUT");
+    const y = document.createElement("INPUT");
+    x.setAttribute("placeholder","Nhập tên sách mượn");
+    x.setAttribute("class", "form-control mb-3");
+    x.setAttribute("name","bookBorrow1")
+    x.setAttribute("list", "datalistBook");
+    y.setAttribute("placeholder","Nhập tên sách mượn");
+    y.setAttribute("list", "datalistBook");
+    y.setAttribute("class", "form-control mb-3");
+    y.setAttribute("name","bookBorrow2")
+    addBook.onclick = () => {
+            $('#nameBook1').html( document.body.appendChild(x));
+            if(nameBook1.className == "nameBook1"){
+                $('#nameBook2').html( document.body.appendChild(y));
+            }
+            nameBook1.setAttribute("class","nameBook1");
+
+    }            
+
+</script>

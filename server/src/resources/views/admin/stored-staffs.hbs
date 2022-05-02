@@ -1,0 +1,75 @@
+<div class="mt-4">
+  <div class="d-flex">
+    <h3 class="me-auto">Nhân viên trong thư viện</h3>
+    <a href="/admin/staffs/create" class="btn btn-primary me-5">Thêm nhân viên mới</a>
+  </div>
+  
+    <table class="table mt-3 ">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Tên nhân viên</th>
+                <th scope="col">Số điện thoại</th>
+                <th scope="col">Địa chỉ </th>
+                <th scope="col">Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each staffs}}
+            <tr>
+                <th scope="row">{{sum @index 1}}</th>
+                <td >{{this.nameStaff}}</td>
+                <td >{{this.phoneStaff}}</td>
+                <td >{{this.addressStaff}}</td>
+                <td >{{this.emailStaff}}</td>
+                <td>
+                    <a href="/admin/staffs/{{this._id}}/edit" class="btn btn-primary">Sửa</a>
+                    <a href="" class="btn btn-danger" data-id="{{this._id}}" data-bs-toggle="modal" data-bs-target="#delete-staff-modal">Xóa</a>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>
+
+{{!-- Confirm Delete Categories --}}
+<div class="modal" tabindex="-1" id="delete-staff-modal" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"> Thông báo xóa sách</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Bạn có chắc chắn muốn Xóa sách này không ?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+        <button id="btn-delete-staff-modal" type="button" class="btn btn-danger">Xóa bỏ</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{!-- Delete Hidden form --}}
+<form name="delete-staff-form" method="POST"></form>
+
+<script>
+    var staffID, button;
+    var deleteForm = document.forms['delete-staff-form'];
+    var deleteStaff = document.getElementById('delete-staff-modal');
+    var btnDeleteStaff = document.getElementById('btn-delete-staff-modal');
+    
+    // When dialog confirm clicked
+    deleteStaff.addEventListener('show.bs.modal', function (event) {
+        button = event.relatedTarget;
+        staffID = button.getAttribute('data-id');
+    })
+
+    // When delete staff btn clicked
+    btnDeleteStaff.onclick= ()=>{
+        deleteForm.action = '/admin/staffs/'+ staffID + '?_method=DELETE';
+        deleteForm.submit();
+    }
+
+</script>

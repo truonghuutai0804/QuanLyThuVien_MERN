@@ -1,0 +1,47 @@
+<div class="mt-4">
+    <h3>Đăng sách</h3>
+    <form method="POST" action="/admin/books/stored" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label for="nameBook" class="form-label">Tên sách</label>
+            <input type="text" class="form-control" id="nameBook" name="nameBook" >
+        </div>
+        <div class="mb-3">
+            <label for="categoryBook" class="form-label">Loại sách</label>
+            <select class="form-select" aria-label="Default select example" id="categoryBook" name="categoryBook">
+                {{#each categories}}
+                <option value="{{_id}}">{{nameCategory}}</option>
+                {{/each}}
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="descriptionBook" class="form-label">Mô tả</label>
+            <input type="text" class="form-control" id="descriptionBook" name="descriptionBook" >
+        </div>
+        <div class="mb-3">
+            <label for="authorBook" class="form-label">Tác giả</label>
+            <select class="form-select" aria-label="Default select example" id="authorBook" name="authorBook">
+                {{#each authors}}
+                <option value="{{_id}}">{{nameAuthor}}</option>
+                {{/each}}
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="publisherBook" class="form-label">Nhà XB</label>
+            <select class="form-select" aria-label="Default select example" id="publisherBook" name="publisherBook">
+                {{#each publishers}}
+                <option value="{{_id}}">{{namePublisher}}</option>
+                {{/each}}
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="yearPublisherBook" class="form-label">Năm XB</label>
+            <input type="month" class="form-control" id="yearPublisherBook" name="yearPublisherBook" >
+        </div>
+        <div class="mb-3">
+            <label for="imageBook" class="form-label">Ảnh của sách:</label>
+            <input class="form-control" type="file" id="imageBook" name="imageBook" >
+        </div>
+
+        <button type="submit" class="btn btn-primary">Thêm sách</button>
+    </form>
+</div> 

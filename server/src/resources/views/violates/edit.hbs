@@ -1,0 +1,22 @@
+<div class="mt-4">
+    <form class = "mt-4" method="POST" action="/admin/violates/{{violate._id}}?_method=PUT" >
+        <h3>Cập nhật vi phạm</h3>
+        <div class="mb-3">
+            <label for="ID" class="form-label">ID vi phạm</label>
+            <input type="text" class="form-control" value="{{violate._id}}" id="ID" name="ID" disabled>
+        </div>
+       <div class="mb-3">
+            <label for="nameViolate" class="form-label">Tên vi phạm</label>
+            <input type="text" class="form-control" value="{{violate.nameViolate}}" id="nameViolate" name="nameViolate">
+        </div>
+        <div class="mb-3">
+            <label for="contentViolate" class="form-label">Nội dung vi phạm</label>
+            <input type="text" class="form-control" value="{{violate.contentViolate}}" id="contentViolate" name="contentViolate">
+        </div>
+        <div class="mb-3">
+            <label for="penalizeViolate" class="form-label">Hình thức xử lý</label>
+            <input type="text" class="form-control" value="{{violate.penalizeViolate}}" id="penalizeViolate" name="penalizeViolate">
+        </div>
+        <button type="submit" class="btn btn-primary">Lưu lại</button>
+    </form>
+</div>

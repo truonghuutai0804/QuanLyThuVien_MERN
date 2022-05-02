@@ -1,0 +1,42 @@
+<div class="mt-4">
+    <div class="d-flex" >
+    <h3 class="me-auto">Danh sách phiếu mượn</h3>
+    <a href="/admin/borrows/create" class="btn btn-primary me-5" >Lập phiếu mượn mới</a>
+  </div>
+
+  
+    <table class="table mt-3 table-sm ">
+        <thead >
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Tên người dùng</th>
+                <th scope="col">Tên nhân viên</th>
+                <th scope="col">Tên sách </th>
+                <th scope="col">Ngày mượn</th>
+                <th scope="col">Ngày hẹn</th>
+                <th scope="col">Ngày trả</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each borrows}}
+            <tr>
+                <th scope="row">{{sum @index 1}}</th>
+                <td >{{this.userBorrow.nameUser}}</td>
+                <td >{{this.staffBorrow.nameStaff}}</td>
+                <td >
+                  {{#each this.bookBorrow}}
+                    {{this.nameBook}}<br>
+                  {{/each}}                
+                </td>
+                <td id="test1">{{dateFormat this.updatedAt "DD-MM-YYYY"}}</td>
+                <td >{{dateFormat this.appointmentDate "DD-MM-YYYY"}}</td>
+                <td id="test2">{{dateFormat this.returnDate "DD-MM-YYYY"}}</td>
+                <td>
+                    <a href="/admin/borrows/{{this._id}}/edit" class="btn btn-primary">Trả sách</a>
+                    {{!-- <a href="" class="btn btn-danger" data-id="{{this._id}}" data-bs-toggle="modal" data-bs-target="#delete-staff-modal">Xóa</a> --}}
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>

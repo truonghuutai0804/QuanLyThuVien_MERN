@@ -1,0 +1,30 @@
+<div class="mt-4">
+    <form class = "mt-4" method="POST" action="/admin/users/{{user._id}}?_method=PUT" >
+        <h3>Cập nhật nhân viên</h3>
+        <div class="mb-3">
+            <label for="ID" class="form-label">ID nhân viên</label>
+            <input type="text" class="form-control" value="{{user._id}}" id="ID" name="ID" disabled>
+        </div>
+       <div class="mb-3">
+            <label for="nameUser" class="form-label">Tên người dùng</label>
+            <input type="text" class="form-control" value="{{user.nameUser}}" id="nameUser" name="nameUser">
+        </div>
+        <div class="mb-3">
+            <label for="majorUser" class="form-label">Ngành học</label>
+            <input type="text" class="form-control" value="{{user.majorUser}}" id="majorUser" name="majorUser">
+        </div>
+        <div class="mb-3">
+            <label for="phoneUser" class="form-label">Số điện thoại</label>
+            <input type="text" class="form-control" value="{{user.phoneUser}}" id="phoneUser" name="phoneUser">
+        </div>
+        <div class="mb-3">
+            <label for="addressUser" class="form-label">Địa chỉ</label>
+            <input type="text" class="form-control" value="{{user.addressUser}}" id="addressUser" name="addressUser">
+        </div>
+        <div class="mb-3">
+            <label for="emailUser" class="form-label">Email</label>
+            <input type="email" class="form-control" value="{{user.emailUser}}" id="emailUser" name="emailUser">
+        </div>
+        <button type="submit" class="btn btn-primary">Lưu lại</button>
+    </form>
+</div>

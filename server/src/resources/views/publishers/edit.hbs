@@ -1,0 +1,14 @@
+<div class="mt-4">
+    <form class = "mt-4" method="POST" action="/admin/publishers/{{publisher._id}}?_method=PUT" >
+        <h3>Cập nhật nhà xuất bản</h3>
+        <div class="mb-3">
+            <label for="ID" class="form-label">ID nhà xuất bản</label>
+            <input type="text" class="form-control" value="{{publisher._id}}" id="ID" name="ID" disabled >
+        </div> 
+        <div class="mb-3">
+            <label for="namePublisher" class="form-label">Tên nhà xuất bản</label>
+            <input type="text" class="form-control" value="{{publisher.namePublisher}}" id="namePublisher" name="namePublisher">
+        </div>
+        <button type="submit" class="btn btn-primary">Lưu lại</button>
+    </form>
+</div>

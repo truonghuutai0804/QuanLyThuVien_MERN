@@ -1,0 +1,74 @@
+<div class="mt-4">
+  <div class="d-flex">
+    <h3 class="me-auto">Danh sách người dùng</h3>
+    <a href="/admin/violates/create" class="btn btn-primary me-5">Tạo vi phạm mới</a>
+  </div>
+  
+    <table class="table mt-3 ">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Tên vi phạm</th>
+                <th scope="col">Nội dung vi phạm</th>
+                <th scope="col">Hình thức xử phạt</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each violates}}
+            <tr>
+                <th scope="row">{{sum @index 1}}</th>
+                <td >{{this.nameViolate}}</td>
+                <td >{{this.contentViolate}}</td>
+                <td >{{this.penalizeViolate}}</td>
+
+                <td>
+                    <a href="/admin/violates/{{this._id}}/edit" class="btn btn-primary">Sửa</a>
+                    <a href="" class="btn btn-danger" data-id="{{this._id}}" data-bs-toggle="modal" data-bs-target="#delete-violate-modal">Xóa</a>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>
+
+{{!-- Confirm Delete Categories --}}
+<div class="modal" tabindex="-1" id="delete-violate-modal" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"> Thông báo xóa vi phạm</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Bạn có chắc chắn muốn Xóa vi phạm này không ?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+        <button id="btn-delete-violate-modal" type="button" class="btn btn-danger">Xóa bỏ</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{!-- Delete Hidden form --}}
+<form name="delete-violate-form" method="POST"></form>
+
+<script>
+    var violateID, button;
+    var deleteForm = document.forms['delete-violate-form'];
+    var deleteViolate = document.getElementById('delete-violate-modal');
+    var btnDeleteViolate = document.getElementById('btn-delete-violate-modal');
+    
+    // When dialog confirm clicked
+    deleteViolate.addEventListener('show.bs.modal', function (event) {
+        button = event.relatedTarget;
+        violateID = button.getAttribute('data-id');
+    })
+
+    // When delete violate btn clicked
+    btnDeleteViolate.onclick= ()=>{
+        deleteForm.action = '/admin/violates/'+ violateID + '?_method=DELETE';
+        deleteForm.submit();
+    }
+
+</script>

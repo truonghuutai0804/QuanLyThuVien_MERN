@@ -1,0 +1,65 @@
+<div class="mt-4">
+    <h3>Cập nhật sách {{book.nameBook}}</h3>
+    <form  class="mt-4" method="POST" action="/admin/books/{{book._id}}?_method=PUT" enctype="multipart/form-data">
+    <div class="row">
+        <div class="col-lg-2">
+            <img  src="/upload/{{book.imageBook}}" alt="{{book.nameBook}}" width="170" height="225">     
+        </div>
+        <div class="col-10">
+            <div class="mb-3">
+                <label for="nameBook" class="form-label" >Tên sách</label>
+                <input type="text" class="form-control" value="{{book.nameBook}}" id="nameBook" name="nameBook" maxlength="50" >
+            </div>
+            <div class="mb-3">
+                <label for="categoryBook" class="form-label">Loại sách</label>
+                <select class="form-select" data-id="{{book.categoryBook._id}}" aria-label="Default select example" id="categoryBook" name="categoryBook">
+                    {{#each categories}}
+                    <option value="{{_id}}">{{nameCategory}}</option>
+                    {{/each}}
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="descriptionBook" class="form-label">Mô tả</label>
+                <input type="text" class="form-control" value="{{book.descriptionBook}}" id="descriptionBook" name="descriptionBook" >
+            </div>
+        </div>
+    </div>
+        <div class="mb-3">
+            <label for="authorBook" class="form-label">Tác giả</label>
+            <select class="form-select" data-id="{{book.authorBook._id}}" aria-label="Default select example" id="authorBook" name="authorBook">
+                {{#each authors}}
+                <option value="{{_id}}">{{nameAuthor}}</option>
+                {{/each}}
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="publisherBook" class="form-label">Nhà XB</label>
+            <select class="form-select" data-id="{{book.publisherBook._id}}" aria-label="Default select example" id="publisherBook" name="publisherBook">
+                {{#each publishers}}
+                <option value="{{_id}}">{{namePublisher}}</option>
+                {{/each}}
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="yearPublisherBook" class="form-label">Năm XB</label>
+            <input type="month" class="form-control" value="{{dateFormat book.yearPublisherBook 'YYYY-MM'}}" id="yearPublisherBook" name="yearPublisherBook" >
+        </div>
+        <div class="mb-3">
+            <label for="imageBook" class="form-label">Ảnh của sách:</label>
+            <input class="form-control" type="file" id="imageBook" name="imageBook" >
+        </div>
+        <button type="submit" class="btn btn-primary">Lưu lại</button>
+    </form>
+</div> 
+
+<script>
+    var dropdown = (id) => {
+        var a = document.getElementById(id);
+        var b = a.getAttribute('data-id');
+        return document.getElementById(id).value = b;
+    }
+    dropdown('categoryBook')
+    dropdown('authorBook')
+    dropdown('publisherBook')
+
+</script>

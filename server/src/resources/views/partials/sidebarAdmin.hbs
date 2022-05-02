@@ -1,0 +1,65 @@
+<div class="mt-5">
+  <div class="nav flex-column nav-pills font-weight-bold" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+    <a class="nav-link" id="v-pills-borrow-tab" data-toggle="pill" href="/admin/stored/borrows" role="tab"
+      aria-controls="v-pills-borrow" aria-selected="true">Quản lý phiếu mượn</a>
+    <hr class="dropdown-divider">
+    <a class="nav-link" id="v-pills-book-tab" data-toggle="pill" href="/admin/stored/books" role="tab"
+      aria-controls="v-pills-book" aria-selected="false">Quản lý sách</a>
+    <hr class="dropdown-divider">
+    <a class="nav-link" id="v-pills-author-tab" data-toggle="pill" href="/admin/stored/authors" role="tab"
+      aria-controls="v-pills-author" aria-selected="false">Quản lý tác giả</a>
+    <hr class="dropdown-divider">
+    <a class="nav-link" id="v-pills-category-tab" data-toggle="pill" href="/admin/stored/categories" role="tab"
+      aria-controls="v-pills-category" aria-selected="false">Quản lý thể loại sách</a>
+    <hr class="dropdown-divider">
+    <a class="nav-link" id="v-pills-staff-tab" data-toggle="pill" href="/admin/stored/staffs" role="tab"
+      aria-controls="v-pills-staff" aria-selected="false">Quản lý nhân viên</a>
+    <hr class="dropdown-divider">
+    <a class="nav-link" id="v-pills-user-tab" data-toggle="pill" href="/admin/stored/users" role="tab"
+      aria-controls="v-pills-user" aria-selected="false">Quản lý người dùng</a>
+    <hr class="dropdown-divider">
+      <a class="nav-link" id="v-pills-publisher-tab" data-toggle="pill" href="/admin/stored/publishers" role="tab"
+      aria-controls="v-pills-publisher" aria-selected="false">Quản lý nhà xuất bản</a>
+    <hr class="dropdown-divider">
+      <a class="nav-link" id="v-pills-violate-tab" data-toggle="pill" href="/admin/stored/violates" role="tab"
+      aria-controls="v-pills-violate" aria-selected="false">Quản lý vi phạm</a>
+    <hr class="dropdown-divider">
+  </div>
+</div>
+
+<script>
+  var search = document.getElementById('v-pills-settings-tab')
+  var borrow = document.getElementById('v-pills-borrow-tab')
+  var book = document.getElementById('v-pills-book-tab')
+  var author = document.getElementById('v-pills-author-tab')
+  var category = document.getElementById('v-pills-category-tab')
+  var staff = document.getElementById('v-pills-staff-tab')
+  var user = document.getElementById('v-pills-user-tab')
+  var publisher = document.getElementById('v-pills-publisher-tab')
+  console.log(location.pathname)
+
+  switch (location.pathname) {
+    case '/admin/stored/books':
+      book.classList.add("active")
+      break;
+    case '/admin/stored/authors':
+      author.classList.add("active")
+      break;
+    case '/admin/stored/categories':
+      category.classList.add("active")
+      break;
+    case '/admin/stored/staffs':
+      staff.classList.add("active")
+      break;
+    case '/admin/stored/users':
+      user.classList.add("active")
+      break;
+    case '/admin/stored/publishers':
+      publisher.classList.add("active")
+      break;
+    default:
+      borrow.classList.add("active")
+      break;
+  }
+
+</script>

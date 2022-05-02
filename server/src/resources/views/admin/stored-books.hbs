@@ -1,0 +1,78 @@
+<div class="mt-4">
+  <div class="d-flex" >
+    <h3 class="me-auto">Sách trong thư viện</h3>
+    <a href="/admin/books/create" class="btn btn-primary me-5" >Thêm sách mới</a>
+  </div>
+  
+    <table class="table mt-3 ">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Tên sách</th>
+                <th scope="col">Tác giả</th>
+                <th scope="col">Loại sách</th>
+                <th scope="col">Nhà XB</th>
+                <th scope="col">Năm XB</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each books}}
+            <tr>
+                <th scope="row">{{sum @index 1}}</th>
+                <td >{{this.nameBook}}</td>
+                <td >{{ this.authorBook.nameAuthor}}</td>
+                <td >{{this.categoryBook.nameCategory}}</td>
+                <td >{{this.publisherBook.namePublisher}}</td>
+                <td>{{dateFormat this.yearPublisherBook "MM/YYYY"}}</td>
+                <td>
+                    <a href="/admin/books/{{this._id}}/edit" class="btn btn-primary">Sửa</a>
+                    <a href="" class="btn btn-danger" data-id="{{this._id}}" data-bs-toggle="modal" data-bs-target="#delete-book-modal">Xóa</a>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>
+
+{{!-- Confirm Delete Books --}}
+<div class="modal" tabindex="-1" id="delete-book-modal" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"> Thông báo xóa sách</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Bạn có chắc chắn muốn Xóa sách này không ?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+        <button id="btn-delete-book-modal" type="button" class="btn btn-danger">Xóa bỏ</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{!-- Delete Hidden form --}}
+<form name="delete-book-form" method="POST"></form>
+
+<script>
+    var bookId, button;
+    var deleteForm = document.forms['delete-book-form'];
+    var deleteBook = document.getElementById('delete-book-modal');
+    var btnDeleteBook = document.getElementById('btn-delete-book-modal');
+
+    // When dialog confirm clicked
+    deleteBook.addEventListener('show.bs.modal', function (event) {
+        button = event.relatedTarget;
+        bookId = button.getAttribute('data-id');
+    })
+
+    // When delete book btn clicked
+    btnDeleteBook.onclick= ()=>{
+        deleteForm.action = '/admin/books/'+ bookId + '?_method=DELETE';
+        deleteForm.submit();
+    }
+
+
+</script>

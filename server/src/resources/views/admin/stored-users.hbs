@@ -1,0 +1,78 @@
+<div class="mt-4">
+  <div class="d-flex">
+    <h3 class="me-auto">Danh sách người dùng</h3>
+    <a href="/admin/publishers/create" class="btn btn-primary me-5">Thêm người dùng mới</a>
+  </div>
+  
+    <table class="table mt-3 ">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Tên người dùng</th>
+                <th scope="col">Ngành học</th>
+                <th scope="col">Số điện thoại</th>
+                <th scope="col">Địa chỉ </th>
+                <th scope="col">Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each users}}
+            <tr>
+                <th scope="row">{{sum @index 1}}</th>
+                <td >{{this.nameUser}}</td>
+                <td >{{this.majorUser}}</td>
+                <td >{{this.phoneUser}}</td>
+                <td >{{this.addressUser}}</td>
+                <td >{{this.emailUser}}</td>
+                <td>
+                    <a href="/admin/users/{{this._id}}/edit" class="btn btn-primary">Sửa</a>
+                    <a href="/admin/users/{{this._id}}/violate" class="btn btn-warning">Vi phạm</a>
+                    <a href="" class="btn btn-danger" data-id="{{this._id}}" data-bs-toggle="modal" data-bs-target="#delete-user-modal">Xóa</a>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>
+
+{{!-- Confirm Delete Categories --}}
+<div class="modal" tabindex="-1" id="delete-user-modal" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"> Thông báo xóa người dùng</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Bạn có chắc chắn muốn Xóa người dùng này không ?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+        <button id="btn-delete-user-modal" type="button" class="btn btn-danger">Xóa bỏ</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{!-- Delete Hidden form --}}
+<form name="delete-user-form" method="POST"></form>
+
+<script>
+    var userID, button;
+    var deleteForm = document.forms['delete-user-form'];
+    var deleteUser = document.getElementById('delete-user-modal');
+    var btnDeleteUser = document.getElementById('btn-delete-user-modal');
+    
+    // When dialog confirm clicked
+    deleteUser.addEventListener('show.bs.modal', function (event) {
+        button = event.relatedTarget;
+        userID = button.getAttribute('data-id');
+    })
+
+    // When delete user btn clicked
+    btnDeleteUser.onclick= ()=>{
+        deleteForm.action = '/admin/users/'+ userID + '?_method=DELETE';
+        deleteForm.submit();
+    }
+
+</script>

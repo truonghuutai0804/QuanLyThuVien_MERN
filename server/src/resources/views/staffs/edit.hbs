@@ -1,0 +1,26 @@
+<div class="mt-4">
+    <form class = "mt-4" method="POST" action="/admin/staffs/{{staff._id}}?_method=PUT" >
+        <h3>Cập nhật nhân viên</h3>
+        <div class="mb-3">
+            <label for="ID" class="form-label">ID nhân viên</label>
+            <input type="text" class="form-control" value="{{staff._id}}" id="ID" name="ID" disabled>
+        </div>
+       <div class="mb-3">
+            <label for="nameStaff" class="form-label">Tên nhân viên</label>
+            <input type="text" class="form-control" value="{{staff.nameStaff}}" id="nameStaff" name="nameStaff">
+        </div>
+        <div class="mb-3">
+            <label for="phoneStaff" class="form-label">Số điện thoại</label>
+            <input type="text" class="form-control" value="{{staff.phoneStaff}}" id="phoneStaff" name="phoneStaff">
+        </div>
+        <div class="mb-3">
+            <label for="addressStaff" class="form-label">Địa chỉ</label>
+            <input type="text" class="form-control" value="{{staff.addressStaff}}" id="addressStaff" name="addressStaff">
+        </div>
+        <div class="mb-3">
+            <label for="emailStaff" class="form-label">Email</label>
+            <input type="email" class="form-control" value="{{staff.emailStaff}}" id="emailStaff" name="emailStaff">
+        </div>
+        <button type="submit" class="btn btn-primary">Lưu lại</button>
+    </form>
+</div>

@@ -1,0 +1,55 @@
+<div class="mt-4">
+    <form class="form-login" id="form-login" method="POST" action="/login">
+        <h2 class="title-login">Đăng Nhập</h2>
+        <div class="mb-3">
+            <label for="username" class="form-label">Tài Khoản:</label>
+            <input type="text" class="form-control" id="username" name="username">
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Mật Khảu</label>
+            <input type="password" class="form-control" id="password" name="password">
+        </div>
+        <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" id="remember">
+            <label class="form-check-label" for="remember">Ghi nhớ</label>
+        </div>
+        <small class="text-danger mb-3" style="display: block;" id="mess"></small>
+        <button type="submit" class="btn btn-primary">Đăng nhập</button>
+    </form>
+</div>
+
+<script>
+    $('#form-login').on('submit', () => {
+    const username = $('#username').val()
+    const password = $('#password').val()
+    if (username.length < 1 || password.length < 1) {
+        $('#mess').html('Tài khoản hoặc mật khẩu đang trống');
+    }
+    else{
+        $.ajax({
+            url: "/login",
+            method: 'post',
+            data: {
+                username: username,
+                password: password,
+            }
+        }).done((result) => {
+            switch (result) {
+                case "ADMIN":
+                    window.location.href = "/admin";
+                    break;
+                case "USER":
+                    window.location.href = "/";
+                    break;
+                case "WP":
+                    $('#mess').html('Sai mật khẩu!');
+                    break;               
+                default:
+                    $('#mess').html('Tài khoản không tồn tại!');
+                    break;
+            }            
+        });
+    }
+    return false;
+})
+</script>

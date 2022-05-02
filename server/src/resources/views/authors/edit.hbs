@@ -1,0 +1,15 @@
+<div class="mt-4">
+    <h3>Cập nhật tác giả</h3>
+    <form  class="mt-4" method="POST" action="/admin/authors/{{author._id}}?_method=PUT" >
+        <div class="mb-3">
+            <label for="ID" class="form-label">ID sách</label>
+            <input type="text" class="form-control" value="{{author._id}}" id="ID" name="ID" disabled >
+        </div> 
+        <div class="mb-3">
+            <label for="nameAuthor" class="form-label">Tên sách</label>
+            <input type="text" class="form-control" value="{{author.nameAuthor}}" id="nameAuthor" name="nameAuthor" >
+        </div>
+
+        <button type="submit" class="btn btn-primary">Lưu lại</button>
+    </form>
+</div> 

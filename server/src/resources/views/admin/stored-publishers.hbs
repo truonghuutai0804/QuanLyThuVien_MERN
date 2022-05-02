@@ -1,0 +1,113 @@
+<div class="mt-4">
+  <div id='messeger'></div>
+  <div class="d-flex">
+    <h3 class="me-auto">Các nhà xuất bản sách</h3>
+    <a href="/admin/publishers/create" class="btn btn-primary me-5">Thêm NXB mới</a>
+  </div>
+
+  
+    <table class="table mt-3 ">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Tên nhà xuât bản</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each publishers}}
+            <tr>
+                <th scope="row">{{sum @index 1}}</th>
+                <td >{{this.namePublisher}}</td>
+                <td>
+                    <a href="/admin/publishers/{{this._id}}/edit" class="btn btn-primary">Sửa</a>
+                    <a href="" class="btn btn-danger" data-id="{{this._id}}" data-bs-toggle="modal" data-bs-target="#delete-publisher-modal">Xóa</a>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>
+
+{{!-- Confirm Delete Categories --}}
+<div class="modal" tabindex="-1" id="delete-publisher-modal" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"> Thông báo xóa sách</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Bạn có chắc chắn muốn Xóa sách này không ?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+        <button id="btn-delete-publisher-modal" type="button" class="btn btn-danger">Xóa bỏ</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{!-- Delete Hidden form --}}
+<form name="delete-publisher-form" method="POST"></form>
+
+<script>
+    var publisherID, button;
+    var deleteForm = document.forms['delete-publisher-form'];
+    var deletePublisher = document.getElementById('delete-publisher-modal');
+    var btnDeletePublisher = document.getElementById('btn-delete-publisher-modal');
+    const errorDelete = `<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+                              <symbol id="exclamation-triangle-fill" fill="currentColor" viewBox="0 0 16 16">
+                                <path
+                                  d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+                              </symbol>
+                            </svg>
+                            <div class="alert alert-danger d-flex align-items-center" role="alert" id="success-alert">
+                              <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:">
+                                <use xlink:href="#exclamation-triangle-fill" />
+                              </svg>
+                              <div>
+                                Không thể xóa nhà xuất bản này vì trong thư viện vẫn <strong>còn sách của nhà xuất bản</strong> này 
+                              </div>
+                            </div>`
+    const successDelete = `<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+                            <symbol id="info-fill" fill="currentColor" viewBox="0 0 16 16">
+                              <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+                            </symbol>
+                          </svg>
+                          <div class="alert alert-success d-flex align-items-center" role="alert">
+                            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill" /></svg>
+                            <div>
+                              Đã xóa <strong>thành công</strong>, sau vài giây NXB sẽ rời khỏi danh sách
+                            </div>
+                          </div>` 
+    // When dialog confirm clicked
+    deletePublisher.addEventListener('show.bs.modal', function (event) {
+        button = event.relatedTarget;
+        publisherID = button.getAttribute('data-id');
+    })
+
+    // When delete publisher btn clicked
+    btnDeletePublisher.onclick= ()=>{
+      $.ajax({
+        url: `/admin/publishers/${publisherID}`,
+        method: 'delete',
+        data: {}
+      }).done((result) => {
+        if (result == "NoDelete") {
+          $('#messeger').html(errorDelete)
+          $('#messeger').show(1000)
+          $('#delete-publisher-modal').click();
+          setTimeout(() => { $('#messeger').hide(2000) }, 4000);
+        }
+        else {
+          $('#messeger').html(successDelete)
+          $('#messeger').show(1000)
+          $('#delete-publisher-modal').click();
+          setTimeout(() => { $('#messeger').hide(2000); location.reload() }, 3000);
+        }
+      });
+        {{!-- deleteForm.action = '/admin/publishers/'+ publisherID + '?_method=DELETE';
+        deleteForm.submit(); --}}
+    }
+
+</script>
